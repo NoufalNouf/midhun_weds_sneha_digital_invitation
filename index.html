@@ -159,31 +159,116 @@ dialog input{color:var(--ink);background:#fff;border-color:#c9b48a}
 #abar button{padding:8px 14px;font-size:.78rem}
 #acount{width:100%;text-align:center}
 /* gallery slider */
-#gallery{padding:84px 0}
-.gframe{position:relative;max-width:1120px;margin:44px auto 0;padding:46px 26px 40px;width:calc(100% - 24px);border:6px solid transparent;
- background:radial-gradient(ellipse at 50% 0,#1f4a4b,#12302f 70%) padding-box,linear-gradient(135deg,#f6e2a8,#b8893f 35%,#f3dfa6 55%,#9a6f2c 80%,#e8cf8e) border-box;
- box-shadow:0 22px 60px rgba(0,0,0,.45),inset 0 0 40px rgba(0,0,0,.35)}
-.gframe:before{content:"";position:absolute;inset:9px;border:1px solid rgba(201,164,92,.7);pointer-events:none;z-index:2}
-.gframe:after{content:"";position:absolute;inset:15px;border:1px dashed rgba(201,164,92,.35);pointer-events:none;z-index:2}
-.gframe i{position:absolute;z-index:3;width:18px;height:18px;background:linear-gradient(135deg,#f6e2a8,#b8893f);transform:rotate(45deg);box-shadow:0 0 0 3px var(--ink2),0 0 0 4px #c9a45c}
-.gframe i:nth-child(1){top:-14px;left:-14px}
-.gframe i:nth-child(2){top:-14px;right:-14px}
-.gframe i:nth-child(3){bottom:-14px;left:-14px}
-.gframe i:nth-child(4){bottom:-14px;right:-14px}
-.gtop{position:absolute;z-index:3;left:50%;top:-17px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:var(--ink2);padding:0 14px}
-.gtop:before,.gtop:after{content:"";width:46px;height:1px;background:linear-gradient(90deg,transparent,#c9a45c)}
-.gtop:after{transform:scaleX(-1)}
-.gtop b{width:14px;height:14px;transform:rotate(45deg);background:linear-gradient(135deg,#f6e2a8,#b8893f);box-shadow:0 0 0 3px var(--ink2),0 0 0 4px #c9a45c}
-.gview{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.gtrack{display:flex;width:max-content;animation:gslide var(--gdur,45s) linear infinite}
-.gview:hover .gtrack,.gview:active .gtrack{animation-play-state:paused}
-.gtrack figure{flex:none;width:290px;height:400px;margin:0 26px 0 0;padding:9px;background:linear-gradient(160deg,#fffaf0,#f1e3c0);border:1px solid #d8bd7e;border-radius:145px 145px 8px 8px;box-shadow:0 0 0 3px rgba(201,164,92,.35),0 14px 30px rgba(0,0,0,.5)}
-.gtrack img{display:block;width:100%;height:100%;object-fit:cover;border-radius:137px 137px 3px 3px}
-@keyframes gslide{to{transform:translateX(-50%)}}
-@media(max-width:560px){.gtrack figure{width:230px;height:330px;margin-right:20px;border-radius:115px 115px 8px 8px}.gtrack img{border-radius:107px 107px 3px 3px}.gframe{padding:40px 12px 32px}}
-@media(prefers-reduced-motion:reduce){.gview{overflow-x:auto}.gtrack{animation:none!important}}
-.hide{display:none!important}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* gallery slider - elegant rectangular design */
+
+#gallery {
+  padding: 84px 0;
+}
+
+.gframe {
+  position: relative;
+  max-width: 1120px;
+  width: calc(100% - 24px);
+  margin: 44px auto 0;
+  padding: 30px 18px;
+  border: 2px solid #c9a45c;
+  border-radius: 0;
+  background: linear-gradient(145deg, #1f4a4b, #12302f);
+  box-shadow: 0 12px 35px rgba(0,0,0,.25);
+}
+
+/* Thin inner golden line */
+.gframe:before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(201,164,92,.4);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Remove extra decorations */
+.gframe:after,
+.gframe > i,
+.gtop {
+  display: none;
+}
+
+/* Sliding gallery */
+.gview {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg, transparent, #000 4%, #000 96%, transparent
+  );
+  mask-image: linear-gradient(
+    90deg, transparent, #000 4%, #000 96%, transparent
+  );
+}
+
+.gtrack {
+  display: flex;
+  width: max-content;
+  animation: gslide var(--gdur,45s) linear infinite;
+}
+
+.gview:hover .gtrack,
+.gview:active .gtrack {
+  animation-play-state: paused;
+}
+
+/* Rectangular photo frames */
+.gtrack figure {
+  flex: none;
+  width: 290px;
+  height: 400px;
+  margin: 0 20px 0 0;
+  padding: 5px;
+  background: #fffaf0;
+  border: 1px solid #c9a45c;
+  border-radius: 0;
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+}
+
+.gtrack img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+@keyframes gslide {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile design */
+@media(max-width:560px) {
+  .gframe {
+    padding: 24px 10px;
+    border-width: 1px;
+  }
+
+  .gtrack figure {
+    width: 230px;
+    height: 330px;
+    margin-right: 16px;
+    padding: 4px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .gview {
+    overflow-x: auto;
+  }
+
+  .gtrack {
+    animation: none !important;
+  }
+}
+
 </style>
 </head>
 <body>
